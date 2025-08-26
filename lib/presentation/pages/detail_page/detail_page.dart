@@ -26,260 +26,236 @@ class DetailPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Expanded(
-          child: Container(
-            padding: EdgeInsets.all(20),
-            child: Column(
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: ListView(
+          children: [
+            Image.asset("assets/images/detail.png", fit: BoxFit.fitWidth),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset("assets/images/detail.png", fit: BoxFit.fitWidth),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "Track 5 Coffee",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Text(
+                      "Opens 7AM-8PM",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff71727A),
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  "Check Menu",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff08979C),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Text(
+              "About",
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff8F9098),
+              ),
+            ),
+            SizedBox(height: 5),
+            Text.rich(
+              TextSpan(
+                text:
+                    "New Jersey’s unofficial cup of coffee might be a simple mug of joe from a diner ",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Color(0xff71727A),
+                  fontWeight: FontWeight.w500,
+                ),
+                children: [
+                  TextSpan(
+                    text: "Read More",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xff08979C),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Rated by",
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff8F9098),
+              ),
+            ),
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 20,
+                      child: Icon(Icons.person, size: 15, color: Colors.blue),
+                    ),
+                    SizedBox(width: 10),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "Track 5 Coffee",
+                          "Karen Roe",
                           style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w800,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),
                         ),
-                        Text(
-                          "Opens 7AM-8PM",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xff71727A),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Check Menu",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff08979C),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Text(
-                  "About",
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff8F9098),
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text.rich(
-                  TextSpan(
-                    text:
-                        "New Jersey’s unofficial cup of coffee might be a simple mug of joe from a diner ",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xff71727A),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: "Read More",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0xff08979C),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  "Rated by",
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff8F9098),
-                  ),
-                ),
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 20,
-                          child: Icon(
-                            Icons.person,
-                            size: 15,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Column(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                            Icon(Icons.star, size: 20, color: Colors.yellow),
                             Text(
-                              "Karen Roe",
+                              "4.8",
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 10,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.black,
+                                color: Color(0xff8F9098),
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  size: 20,
-                                  color: Colors.yellow,
-                                ),
-                                Text(
-                                  "4.8",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xff8F9098),
-                                  ),
-                                ),
-                              ],
                             ),
                           ],
                         ),
                       ],
                     ),
-                    Text(
-                      "See All",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff08979C),
-                      ),
-                    ),
                   ],
                 ),
-                SizedBox(height: 20),
                 Text(
-                  "check Google Reviews",
+                  "See All",
                   style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff8F9098),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff08979C),
                   ),
                 ),
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 20,
-                          child: Icon(
-                            Icons.person,
-                            size: 15,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Joshua Miller",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  size: 20,
-                                  color: Colors.yellow,
-                                ),
-                                Text(
-                                  "3.9",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xff8F9098),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Icon(Icons.share, size: 25, color: Color(0xff08979C)),
-                  ],
-                ),
-
-                SizedBox(height: 10),
-                Text(
-                  "Write a Review",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff8F9098),
-                  ),
-                ),
-                Text(
-                  "Alright, Frequenters, time to drop some wisdom!",
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff8F9098),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    Icon(Icons.star_outline, size: 35, color: Colors.yellow),
-                    Icon(Icons.star_outline, size: 35, color: Colors.yellow),
-                    Icon(Icons.star_outline, size: 35, color: Colors.yellow),
-                    Icon(Icons.star_outline, size: 35, color: Colors.yellow),
-                    Icon(Icons.star_outline, size: 35, color: Colors.yellow),
-                  ],
-                ),
-
-                TextField(
-                  controller: reviewController,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    hintText: "Drop Your Hot Take",
-                    hintStyle: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xffC5C6CC),
-                    ),
-                  ),
-                  style: TextStyle(fontSize: 12, color: Colors.black),
-                ),
-
-                SizedBox(height: 20),
-                CustomButton(onTap: () {}, title: "Submit", width: width),
               ],
             ),
-          ),
+            SizedBox(height: 20),
+            Text(
+              "check Google Reviews",
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff8F9098),
+              ),
+            ),
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 20,
+                      child: Icon(Icons.person, size: 15, color: Colors.blue),
+                    ),
+                    SizedBox(width: 10),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Joshua Miller",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(Icons.star, size: 20, color: Colors.yellow),
+                            Text(
+                              "3.9",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xff8F9098),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Icon(Icons.share, size: 25, color: Color(0xff08979C)),
+              ],
+            ),
+
+            SizedBox(height: 10),
+            Text(
+              "Write a Review",
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff8F9098),
+              ),
+            ),
+            Text(
+              "Alright, Frequenters, time to drop some wisdom!",
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff8F9098),
+              ),
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Icon(Icons.star_outline, size: 35, color: Colors.yellow),
+                Icon(Icons.star_outline, size: 35, color: Colors.yellow),
+                Icon(Icons.star_outline, size: 35, color: Colors.yellow),
+                Icon(Icons.star_outline, size: 35, color: Colors.yellow),
+                Icon(Icons.star_outline, size: 35, color: Colors.yellow),
+              ],
+            ),
+
+            TextField(
+              controller: reviewController,
+              maxLines: 5,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: "Drop Your Hot Take",
+                hintStyle: TextStyle(fontSize: 12, color: Color(0xffC5C6CC)),
+              ),
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+
+            SizedBox(height: 20),
+            CustomButton(onTap: () {}, title: "Submit", width: width),
+          ],
         ),
       ),
     );
