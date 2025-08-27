@@ -1,22 +1,54 @@
-import 'package:cyberbells/presentation/pages/auth_pages/confirmation_page.dart';
 import 'package:cyberbells/presentation/widgets/custom_button.dart';
 import 'package:cyberbells/presentation/widgets/custom_textfield.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart' show Provider;
 
-class SignupPage extends StatelessWidget {
+import '../../../provider/firebase_provider.dart';
+
+class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController phoneNoController = TextEditingController();
-    TextEditingController nameController = TextEditingController();
-    TextEditingController confirmPswController = TextEditingController();
+  State<SignupPage> createState() => _SignupPageState();
+}
 
+class _SignupPageState extends State<SignupPage> {
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+  late TextEditingController phoneNoController;
+  late TextEditingController nameController;
+  late TextEditingController confirmPswController;
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    phoneNoController = TextEditingController();
+    nameController = TextEditingController();
+    confirmPswController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    phoneNoController.dispose();
+    nameController.dispose();
+    confirmPswController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width * 0.9;
+    final authProvider = Provider.of<FirebaseProvider>(context, listen: false);
+    void signup(String email, String password) async {
+      await authProvider.registerWithEmailAndPassword(email, password);
+      Fluttertoast.showToast(msg: "Sign Up Successfull.");
+      Navigator.pop(context);
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -55,7 +87,8 @@ class SignupPage extends StatelessWidget {
             SizedBox(height: 5),
             CustomTextfield(
               controller: nameController,
-              hintText: "Enter your name",
+              labelText: "Enter your name",
+              icon: Icons.person,
             ),
             SizedBox(height: 10),
             Text(
@@ -69,7 +102,8 @@ class SignupPage extends StatelessWidget {
             SizedBox(height: 5),
             CustomTextfield(
               controller: emailController,
-              hintText: "name@email.com",
+              icon: Icons.email,
+              labelText: "name@email.com",
             ),
             SizedBox(height: 10),
             Text(
@@ -83,7 +117,8 @@ class SignupPage extends StatelessWidget {
             SizedBox(height: 5),
             CustomTextfield(
               controller: phoneNoController,
-              hintText: "XXX-XXX-XXXX",
+              labelText: "XXX-XXX-XXXX",
+              icon: Icons.phone,
             ),
             SizedBox(height: 10),
             Text(
@@ -97,12 +132,16 @@ class SignupPage extends StatelessWidget {
             SizedBox(height: 5),
             CustomTextfield(
               controller: passwordController,
-              hintText: "Create a password",
+              labelText: "Create a password",
+              icon: Icons.password,
+              isPassword: true,
             ),
             SizedBox(height: 10),
             CustomTextfield(
               controller: confirmPswController,
-              hintText: "Confirm password",
+              labelText: "Confirm password",
+              icon: Icons.password,
+              isPassword: true,
             ),
             SizedBox(height: 20),
             Row(
@@ -153,14 +192,21 @@ class SignupPage extends StatelessWidget {
             SizedBox(height: 20),
             CustomButton(
               onTap: () {
-                Navigator.push(
-                  context,
-                  PageTransition(
-                    duration: Duration(milliseconds: 200),
-                    type: PageTransitionType.rightToLeft,
-                    child: ConfirmationPage(),
-                  ),
-                );
+                if (emailController.text.isNotEmpty &&
+                    passwordController.text.isNotEmpty &&
+                    nameController.text.isNotEmpty &&
+                    phoneNoController.text.isNotEmpty &&
+                    confirmPswController.text.isNotEmpty) {
+                  if (passwordController.text == confirmPswController.text) {
+                    signup(emailController.text, passwordController.text);
+                  } else {
+                    Fluttertoast.showToast(
+                      msg: "Password and confirm password do not match.",
+                    );
+                  }
+                } else {
+                  Fluttertoast.showToast(msg: "Please fill all fields");
+                }
               },
               title: "Sign Up",
               width: width,

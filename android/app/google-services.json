@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "981236886671",
+    "project_id": "cyberbell-5b6b4",
+    "storage_bucket": "cyberbell-5b6b4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981236886671:android:e064e35ac177fb2d0cd4fa",
+        "android_client_info": {
+          "package_name": "com.example.cyberbells"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdunjfiS1-oQQwup0Ago1wUDMl3AB7_z0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

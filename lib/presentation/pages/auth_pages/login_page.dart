@@ -3,18 +3,62 @@ import 'package:cyberbells/presentation/pages/auth_pages/signup_page.dart';
 import 'package:cyberbells/presentation/pages/home_pages/home_page.dart';
 import 'package:cyberbells/presentation/widgets/custom_button.dart';
 import 'package:cyberbells/presentation/widgets/custom_textfield.dart';
+import 'package:cyberbells/provider/firebase_provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
     final width = MediaQuery.of(context).size.width * 0.9;
+    final authProvider = Provider.of<FirebaseProvider>(context, listen: false);
+
+    void login(String email, String password) async {
+      bool isLogin = await authProvider.loginWithEmailAndPassword(
+        email,
+        password,
+      );
+      if (isLogin) {
+        Fluttertoast.showToast(msg: "Login Successfull.");
+        Navigator.pushAndRemoveUntil(
+          context,
+          PageTransition(
+            duration: Duration(milliseconds: 200),
+            type: PageTransitionType.rightToLeft,
+            child: HomePage(),
+          ),
+          (route) => false,
+        );
+      }
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -39,12 +83,14 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 10),
             CustomTextfield(
               controller: emailController,
-              hintText: "Email Address",
+              labelText: "Email Address",
+              icon: Icons.email,
             ),
             SizedBox(height: 20),
             CustomTextfield(
               controller: passwordController,
-              hintText: "Password",
+              labelText: "Password",
+              icon: Icons.password,
               isPassword: true,
             ),
             SizedBox(height: 10),
@@ -71,15 +117,12 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 20),
             CustomButton(
               onTap: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  PageTransition(
-                    duration: Duration(milliseconds: 200),
-                    type: PageTransitionType.rightToLeft,
-                    child: HomePage(),
-                  ),
-                  (route) => false,
-                );
+                if (emailController.text.isNotEmpty &&
+                    passwordController.text.isNotEmpty) {
+                  login(emailController.text, passwordController.text);
+                } else {
+                  Fluttertoast.showToast(msg: "Please fill all fields");
+                }
               },
               title: "Login",
               width: width,
